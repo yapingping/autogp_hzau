@@ -154,8 +154,7 @@ const TrainOptimal = () => {
 
   const onFinish = async values => {
     setUploading(true);
-    // message.success(t("Submitted, please wait patiently!"))
-    message.success(t("This function is currently undergoing internal testing and is expected to be officially launchedupon completion. Please stay tuned for updates."))
+    message.success(t("Submitted, please wait patiently!"))
     let formData = new FormData();
     formData.append("vcf1", values.vcf_train);
     formData.append("csv", values.csv_train);

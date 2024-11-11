@@ -1,14 +1,15 @@
 import { Button, message, Modal } from "antd"
-import { startTransition, } from "react";
+import { startTransition, useEffect, useState, } from "react";
 import { CarryOutOutlined } from '@ant-design/icons'
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "@/utils";
 import './index.scss'
 import { useTranslation } from "react-i18next";
+import { getUserInfoAPI } from "@/apis";
 const Init = () => {
 
   const { t } = useTranslation();
-  const username = localStorage.getItem("username");
+  const [username,setUsername] = useState(localStorage.getItem("username"));
 
   const navigate = useNavigate();
 
@@ -19,6 +20,17 @@ const Init = () => {
       startTransition(() => {
         navigate('/app/select/train');
       });
+    } else {
+      message.error("You are not logged in yet, please log in first!")
+    }
+  }
+  const toCorn = () => {
+    if (username !== null) {
+      // 使用 startTransition 包裹 navigate，优化导航行为
+      // startTransition(() => {
+      //   navigate('/corn_intelligent_management_platform');
+      // });
+      window.open('/corn_intelligent_management_platform', '_black')
     } else {
       message.error("You are not logged in yet, please log in first!")
     }
@@ -53,6 +65,23 @@ const Init = () => {
     });
   };
 
+  // 判断token是否失效
+  useEffect(()=>{
+    console.log()
+    async function getData() {
+      try {
+        const res = (await getUserInfoAPI()).data;
+        if (res.code == 401) {
+          localStorage.clear();
+          setUsername(null);
+        }
+      } catch (error) {
+        console.error('failed:', error);
+        message.error(t("Failed to obtain personal information. Please check the network and try again or log in again."));
+      }
+    }
+    getData();
+  },[])
   return (
     <div className="init">
       <div className="header">
@@ -126,7 +155,7 @@ const Init = () => {
               </div>
             </div>
           </div>
-          <Button className="corn_button" onClick={() => { window.open('/corn_intelligent_management_platform', '_black') }}>View details</Button>
+          <Button className="corn_button" onClick={toCorn}>View details</Button>
         </div>
       </div>
       <div className="help">
