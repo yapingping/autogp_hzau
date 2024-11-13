@@ -16,6 +16,7 @@ const MulitPredictRecord = ({ records }) => {
       createTime: record.createTime.slice(0, 10), // 只取前10个字符
     }));
     setDataSource(initialDataSource);
+    
   }, [records]);
   const { t } = useTranslation();
 
@@ -100,7 +101,7 @@ const MulitPredictRecord = ({ records }) => {
       key: 'ps',
       render: (_, record) => (
         <span>
-          <Button disabled={record.path===null} onClick={() => onDownload(record.path)} style={{ marginRight: 16 }}>{t('Download')}</Button>
+          <Button disabled={record.path.startsWith("Execution")} onClick={() => onDownload(record.path)} style={{ marginRight: 16 }}>{t('Download')}</Button>
         </span>
       ),
     },

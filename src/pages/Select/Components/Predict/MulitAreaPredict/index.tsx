@@ -329,9 +329,13 @@ const MulitAreaPredict = () => {
         if (res.fileName1 === undefined) {
           message.error(t("No result. Please check whether the selected file is correct"))
         } else {
+          if(!res.fileName1.startsWith("Execution")){
           message.success("Success! Please download the results!")
           setResData(res);
-          setDownload(true);
+          setDownload(true);}
+          else{
+            message.error("No result. Please check whether the selected file is correct")
+          }
         }
       } else {
         message.error(res.msg)
