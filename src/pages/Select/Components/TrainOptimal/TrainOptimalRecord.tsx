@@ -29,9 +29,10 @@ const TrainOptimalRecord = ({ records }) => {
       setSelectedRowKeys([]);
     }
   };
-  const onDownload = (path) => {
+  const onDownload = (path,path_csv) => {
     if(path){
       downloadFiveRecord(path,download5)
+      downloadFiveRecord(path_csv,download5)
     }
   }
   const handleCheckboxChange = (optimalparentsId) => {
@@ -119,7 +120,7 @@ const TrainOptimalRecord = ({ records }) => {
       key: 'ps',
       render: (_, record) => (
         <span>
-          <Button disabled={record.path===undefined||record.path===null} onClick={() => onDownload(record.path)} style={{ marginRight: 16 }}>{t('Download')}</Button>
+          <Button disabled={record.pathZip===undefined||record.pathZip===null} onClick={() => onDownload(record.pathZip,record.pathCsv)} style={{ marginRight: 16 }}>{t('Download')}</Button>
         </span>
       ),
     },

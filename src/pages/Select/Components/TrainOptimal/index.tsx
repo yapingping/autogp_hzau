@@ -1,10 +1,15 @@
-import { Button, Form, Upload, Space, Select, Input, message, Dropdown } from 'antd';
+import {
+  Button, Form, Upload,
+  Space, Select,
+  Input, message, Dropdown,
+  Table,
+} from 'antd';
 import { useEffect, useState, useRef } from 'react';
 import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { getTrainOptimalRecord, getPersonalFileAPI, getBoutiqueFileAPI, getShareFileAPI, trainOptimalAPI, download5 } from '@/apis';
 import TrainOptimalRecord from './TrainOptimalRecord';
-import { file_filter, file_move, tokenLoss } from '@/utils';
+import { file_filter, file_move2, tokenLoss } from '@/utils';
 import './index.scss';
 import { useLocation } from 'react-router-dom';
 import HelpVideo from '@/components/HelpVideo';
@@ -16,6 +21,7 @@ const TrainOptimal = () => {
   const formRef = useRef(null);
 
   const [resData, setResData] = useState(null);
+  const [result, setResult] = useState({})
   const [record, setRecord] = useState([]);
 
   const [personalFiles, setPersonalFiles] = useState([]);
@@ -178,6 +184,13 @@ const TrainOptimal = () => {
         } else {
           message.success(t("Success! Please download the results!"))
           setResData(res);
+          setResult({
+            "matrix2": res.matrix2,
+            "matrix3": res.matrix3,
+            "matrix4": res.matrix4,
+            "matrix5": res.matrix5,
+            "matrix6": res.matrix6,
+          })
           setDownload(true);
         }
       } else {
@@ -211,6 +224,27 @@ const TrainOptimal = () => {
       }
     }
   };
+  const loadFile2 = async () => {
+    if (download && resData) {
+      try {
+        const fileName = resData.fileName2;
+        const fileQ = fileName.split("_R_")[0];
+        const response = await download5(resData.fileName1, fileQ);
+        const blob = new Blob([response.data], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', resData.fileName1);
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        link.remove();
+        message.success(t(`Successfully downloaded file`) + `: ${resData.fileName2}`);
+      } catch (error) {
+        throw error;
+      }
+    }
+  };
 
 
   const vcf_train_Items = [
@@ -233,7 +267,7 @@ const TrainOptimal = () => {
           setSelectedVcfTrain_UploadOption(file.key);
           form.setFieldsValue({ vcf_train: file.key });
           // 文件移动
-          file_move(file.key, localStorage.getItem("username"), "train")
+          file_move2(file.key, localStorage.getItem("username"), "train_selection")
         },
       })),
     },
@@ -248,7 +282,7 @@ const TrainOptimal = () => {
           setSelectedVcfTrain_UploadOption(file.key);
           form.setFieldsValue({ vcf_train: file.key });
           // 文件移动
-          file_move(file.key, "share", "train")
+          file_move2(file.key, "share", "train_selection")
         },
       })),
     },
@@ -263,7 +297,7 @@ const TrainOptimal = () => {
           setSelectedVcfTrain_UploadOption(file.key);
           form.setFieldsValue({ vcf_train: file.key });
           // 文件移动
-          file_move(file.key, "boutique", "train")
+          file_move2(file.key, "boutique", "train_selection")
         },
       })),
     },
@@ -289,7 +323,7 @@ const TrainOptimal = () => {
           setSelectedCsvTrain_UploadOption(file.key);
           form.setFieldsValue({ csv_train: file.key });
           // 文件移动
-          file_move(file.key, localStorage.getItem("username"), "train")
+          file_move2(file.key, localStorage.getItem("username"), "train_selection")
         },
       })),
     },
@@ -304,7 +338,7 @@ const TrainOptimal = () => {
           setSelectedCsvTrain_UploadOption(file.key);
           form.setFieldsValue({ csv_train: file.key });
           // 文件移动
-          file_move(file.key, "share", "train")
+          file_move2(file.key, "share", "train_selection")
         },
       })),
     },
@@ -319,7 +353,7 @@ const TrainOptimal = () => {
           setSelectedCsvTrain_UploadOption(file.key);
           form.setFieldsValue({ csv_train: file.key });
           // 文件移动
-          file_move(file.key, "boutique", "train")
+          file_move2(file.key, "boutique", "train_selection")
         },
       })),
     },
@@ -345,7 +379,7 @@ const TrainOptimal = () => {
           setSelectedVcfUploadOption(file.key);
           form.setFieldsValue({ vcf: file.key });
           // 文件移动
-          file_move(file.key, localStorage.getItem("username"), "optimal_parents")
+          file_move2(file.key, localStorage.getItem("username"), "train_selection")
 
         }
       })),
@@ -361,7 +395,7 @@ const TrainOptimal = () => {
           setSelectedVcfUploadOption(file.key);
           form.setFieldsValue({ vcf: file.key });
           // 文件移动
-          file_move(file.key, "share", "optimal_parents")
+          file_move2(file.key, "share", "train_selection")
         }
       })),
     },
@@ -376,7 +410,7 @@ const TrainOptimal = () => {
           setSelectedVcfUploadOption(file.key);
           form.setFieldsValue({ vcf: file.key });
           // 文件移动
-          file_move(file.key, "boutique", "optimal_parents")
+          file_move2(file.key, "boutique", "train_selection")
         }
       })),
     },
@@ -402,7 +436,7 @@ const TrainOptimal = () => {
           setSelectedTxtUploadOption(file.key);
           form.setFieldsValue({ txt: file.key });
           // 文件移动
-          file_move(file.key, localStorage.getItem("username"), "optimal_parents")
+          file_move2(file.key, localStorage.getItem("username"), "train_selection")
         }
       })),
     },
@@ -417,7 +451,7 @@ const TrainOptimal = () => {
           setSelectedTxtUploadOption(file.key);
           form.setFieldsValue({ txt: file.key });
           // 文件移动
-          file_move(file.key, "share", "optimal_parents")
+          file_move2(file.key, "share", "train_selection")
         }
       })),
     },
@@ -432,7 +466,7 @@ const TrainOptimal = () => {
           setSelectedTxtUploadOption(file.key);
           form.setFieldsValue({ txt: file.key });
           // 文件移动
-          file_move(file.key, "boutique", "optimal_parents")
+          file_move2(file.key, "boutique", "train_selection")
         }
       })),
     },
@@ -441,6 +475,37 @@ const TrainOptimal = () => {
     console.log(`selected ${value}`);
     setModel(value);
   };
+  const dataResult = Object.keys(result).map(key => {
+    if (Object.getOwnPropertyNames(result).length !== 0) {
+      const parts = result[key].split(/\s+/); // 根据空格分割字符串
+      return {
+        key: key,
+        aaa: parts[0],
+        id: parts[1],
+        predict: parts[2]
+      };
+    } else {
+      return {}
+    }
+  });
+
+  const columns = [
+    {
+      title: ' ',
+      dataIndex: 'aaa',
+      key: 'aaa'
+    },
+    {
+      title: 'id',
+      dataIndex: 'id',
+      key: 'id'
+    },
+    {
+      title: 'predict',
+      dataIndex: 'predict',
+      key: 'predict'
+    }
+  ];
 
   return (
     <div className='train_optimal'>
@@ -570,7 +635,20 @@ const TrainOptimal = () => {
             <Form.Item className='P-func-item'>
               <Button onClick={loadFile} disabled={!download}>{t('Download!')}</Button>
             </Form.Item>
+
+            <Form.Item className='P-func-item'>
+              <Button onClick={loadFile} disabled={!download}>{t('Download the model file')}</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button onClick={loadFile2} disabled={!download}>{t('Download the CSV file')}</Button>
+            </Form.Item>
           </Form>
+
+          <div className='footer'>
+            {resData &&
+              <div>
+                <Table columns={columns} dataSource={dataResult} pagination={false} />
+              </div>
+            }
+          </div>
         </div>
         <div className="divider"></div>
         <div className='history'>
