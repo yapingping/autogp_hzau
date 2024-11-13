@@ -229,12 +229,12 @@ const TrainOptimal = () => {
       try {
         const fileName = resData.fileName2;
         const fileQ = fileName.split("_R_")[0];
-        const response = await download5(resData.fileName1, fileQ);
+        const response = await download5(resData.fileName2, fileQ);
         const blob = new Blob([response.data], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', resData.fileName1);
+        link.setAttribute('download', resData.fileName2);
         document.body.appendChild(link);
         link.click();
         window.URL.revokeObjectURL(url);
@@ -631,9 +631,6 @@ const TrainOptimal = () => {
             </Form.Item>
             <Form.Item className='P-func-item'>
               <Button type="primary" htmlType="submit" loading={uploading} disabled={uploading}>{t('Submit')}</Button>
-            </Form.Item>
-            <Form.Item className='P-func-item'>
-              <Button onClick={loadFile} disabled={!download}>{t('Download!')}</Button>
             </Form.Item>
 
             <Form.Item className='P-func-item'>

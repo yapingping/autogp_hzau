@@ -67,7 +67,7 @@ export function mulitPredictAPI(trainData) {
     })
 }
 function download2(fileName) {
-  return request.get('/predict/download', { params: { fileName } })
+  return request.get('/predict/download', { params: { fileName }, responseType: 'arraybuffer' })
     .then(response => response)
     .catch(error => {
       throw error;
@@ -139,7 +139,7 @@ function optimalAPI(optimalData) {
     })
 }
 function download4(fileName) {
-  return request.get('/optimalParents/download', { params: { fileName } })
+  return request.get('/optimalParents/download', { params: { fileName }, responseType: 'arraybuffer' })
     .then(response => response)
     .catch(error => {
       throw error;
@@ -162,7 +162,7 @@ export function trainOptimalAPI(data) {
     })
 }
 export function download5(fileName,fileQ) {
-  return request.get('/trainSelection/download', { params: { fileName,fileQ } })
+  return request.get('/trainSelection/download', { params: { fileName,fileQ }, responseType: 'arraybuffer' })
     .then(response => response)
     .catch(error => {
       throw error;
