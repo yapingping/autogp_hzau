@@ -4,6 +4,7 @@ import { file_filter, file_move } from '@/utils/file.tsx';
 import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { getPersonalFileAPI, getBoutiqueFileAPI, getShareFileAPI, mulitTrainAPI, downloadMulTrainCombine } from '@/apis';
 import { useTranslation } from "react-i18next";
+import HelpVideo from "@/components/HelpVideo";
 
 const MulitAreaTrain = () => {
   const { t } = useTranslation();
@@ -372,6 +373,7 @@ const MulitAreaTrain = () => {
   return (
 
     <div className="single_area">
+      <HelpVideo videoPath={'/helpVideo/mul_train.mp4'}/>
       <Form ref={formRef} form={form} name='normFile' onFinish={onFinish}>
         <Form.Item
           name='vcf'

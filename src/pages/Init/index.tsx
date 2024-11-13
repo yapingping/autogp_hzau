@@ -30,7 +30,7 @@ const Init = () => {
       // startTransition(() => {
       //   navigate('/corn_intelligent_management_platform');
       // });
-      window.open('/corn_intelligent_management_platform', '_black')
+      window.open('/cimp', '_black')
     } else {
       message.error("You are not logged in yet, please log in first!")
     }

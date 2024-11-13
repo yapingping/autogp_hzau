@@ -1,4 +1,4 @@
-import { Button, Form, Upload, Space, Select,Input, message, Dropdown } from 'antd';
+import { Button, Form, Upload, Space, Select, Input, message, Dropdown } from 'antd';
 import { useEffect, useState, useRef } from 'react';
 import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import TrainOptimalRecord from './TrainOptimalRecord';
 import { file_filter, file_move, tokenLoss } from '@/utils';
 import './index.scss';
 import { useLocation } from 'react-router-dom';
+import HelpVideo from '@/components/HelpVideo';
 
 const TrainOptimal = () => {
   const pathname = useLocation().pathname;
@@ -21,7 +22,7 @@ const TrainOptimal = () => {
   const [shareFiles, setShareFiles] = useState([]);
   const [boutiqueFiles, setBoutiqueFiles] = useState([]);
 
-  const [model, setModel] = useState('DeepGS');
+  const [model, setModel] = useState('XGBOOST');
   const [selectedVcfTrain_UploadOption, setSelectedVcfTrain_UploadOption] = useState(null);
   const [selectedCsvTrain_UploadOption, setSelectedCsvTrain_UploadOption] = useState(null);
   const [selectedVcfUploadOption, setSelectedVcfUploadOption] = useState(null);
@@ -161,7 +162,7 @@ const TrainOptimal = () => {
     formData.append("vcf2", values.vcf);
     formData.append("txt", values.txt);
     formData.append("model", model);
-    formData.append("num", values.valuenum+'');
+    formData.append("num", values.valuenum + '');
 
     // 输出 FormData 内容
     formData.forEach((value, key) => {
@@ -179,7 +180,7 @@ const TrainOptimal = () => {
           setResData(res);
           setDownload(true);
         }
-      }else{
+      } else {
         message.error(res.msg)
       }
     } catch (error) {
@@ -194,7 +195,7 @@ const TrainOptimal = () => {
       try {
         const fileName = resData.fileName1;
         const fileQ = fileName.split("_R_")[0];
-        const response = await download5(resData.fileName1,fileQ);
+        const response = await download5(resData.fileName1, fileQ);
         const blob = new Blob([response.data], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -455,6 +456,7 @@ const TrainOptimal = () => {
       </div>
       <div className='container'>
         <div className='func'>
+          <HelpVideo videoPath={'/helpVideo/five.mp4'} />
           <Form ref={formRef} form={form} onFinish={onFinish}>
             <Form.Item
               name='vcf_train'
@@ -539,20 +541,20 @@ const TrainOptimal = () => {
             >
               <Space>
                 <Select
-                  defaultValue='DeepGS'
-                  style={{ width: 150 }}
+                  defaultValue="XGBOOST"
+                  style={{ width: 120 }}
                   onChange={modelChange}
                   options={[
-                    { value: 'DNNGP', label: 'DNNGP' },
-                    { value: 'DLGWAS', label: 'DLGWAS' },
-                    { value: 'DeepGS', label: 'DeepGS' },
-                    { value: 'SoyDNGP', label: 'SoyDNGP' },
-                    { value: 'OHGP', label: 'OHGP' },
                     { value: 'XGBOOST', label: 'XGBOOST' },
                     { value: 'GBDT', label: 'GBDT' },
                     { value: 'MLP', label: 'MLP' },
                     { value: 'SVM', label: 'SVM' },
                     { value: 'RandomForest', label: 'RandomForest' },
+                    { value: 'DNNGP', label: 'DNNGP' },
+                    { value: 'DLGWAS', label: 'DLGWAS' },
+                    { value: 'DeepGS', label: 'DeepGS' },
+                    { value: 'SoyDNGP', label: 'SoyDNGP' },
+                    { value: 'OHGP', label: 'OHGP' },
                   ]}
                 />
               </Space>

@@ -68,8 +68,8 @@ const MulitPredictRecord = ({ records }) => {
     },
     {
       title: t('Train Id'),
-      dataIndex: 'predictId',
-      key: 'predictId',
+      dataIndex: 'mulPredictId',
+      key: 'mulPredictId',
     },
     {
       title: t('Time'),
@@ -85,20 +85,14 @@ const MulitPredictRecord = ({ records }) => {
       ),
     },
     {
-      title: t('Model File'),
-      dataIndex: 'model1',
-      key: 'model1',
-      render: (_, record) => (
-        <span>{record.model1}</span>
-      ),
+      title: t('csv File'),
+      dataIndex: 'csv',
+      key: 'csv',
     },
     {
-      title: 'DNNGP ' + t('Model File'),
-      dataIndex: 'model2',
-      key: 'model2',
-      render: (_, record) => (
-        <span>{record.model2}</span>
-      ),
+      title: t('Model File'),
+      dataIndex: 'predict',
+      key: 'predict',
     },
     {
       title: t('#'),

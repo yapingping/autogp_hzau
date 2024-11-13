@@ -5,6 +5,7 @@ import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { downloadMulPredict, getBoutiqueFileAPI, getPersonalFileAPI, getShareFileAPI, mulitPredictAPI } from '@/apis';
 import { downloadPredictRecord, file_filter, file_move } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import HelpVideo from '@/components/HelpVideo';
 const MulitAreaPredict = () => {
 
   const { t } = useTranslation();
@@ -237,9 +238,9 @@ const MulitAreaPredict = () => {
 
   const vcfProps = {
     name: 'file',
-    action: 'http://218.199.69.63:39600/uploadFile',
+    action: '/api/uploadFile',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
       token: `${localStorage.getItem('token_key')}`,
     },
     data: {
@@ -263,7 +264,7 @@ const MulitAreaPredict = () => {
     name: 'file',
     action: 'http://218.199.69.63:39600/uploadFile',
     headers: {
-      'Content-Type': 'application/form-data',
+      // 'Content-Type': 'application/form-data',
       token: `${localStorage.getItem('token_key')}`,
     },
     data: {
@@ -287,7 +288,7 @@ const MulitAreaPredict = () => {
     name: 'file',
     action: 'http://218.199.69.63:39600/uploadFile',
     headers: {
-      'Content-Type': 'application/form-data',
+      // 'Content-Type': 'application/form-data',
       token: `${localStorage.getItem('token_key')}`,
     },
     data: {
@@ -353,6 +354,7 @@ const MulitAreaPredict = () => {
 
   return (
     <div className="mulit">
+      <HelpVideo videoPath={'/helpVideo/mul_predict.mp4'}/>
       <Form ref={formRef} form={form} onFinish={onFinish}>
         <Form.Item
           name="vcf"

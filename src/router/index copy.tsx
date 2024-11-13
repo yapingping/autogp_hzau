@@ -20,7 +20,7 @@ import PhenotypeData from "@/pages/DataManage/Components/PhenotypeData";
 import LoginEmail from "@/pages/User/LoginEmail";
 import Phenotype from "@/pages/Analysis/Components/Phenotype";
 import Pretreatment from "@/pages/Pretreatment";
-import PrePhenotype from "@/pages/Pretreatment/Components/Phenotype/index";
+import PrePhenotype from "@/pages/Pretreatment/Components/Phenotype";
 // import AAAOBJ from "@/pages/AAAOBJ";
 import PreGene from "@/pages/Pretreatment/Components/Gene";
 import AnalGWAS from "@/pages/Analysis/Components/GWAS";

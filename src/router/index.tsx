@@ -321,7 +321,7 @@ export const router = createBrowserRouter([
     )
   },
   {
-    path: '/corn_intelligent_management_platform',
+    path: '/cimp',
     element: (
       <Suspense fallback={<RouteLoading />}>
         <CornManagementPlatform />
@@ -329,7 +329,7 @@ export const router = createBrowserRouter([
     )
   },
   {
-    path: '/corn_intelligent_management_platform/ply_detail',
+    path: `/cimp/ply_detail`,
     element: (
       <Suspense fallback={<RouteLoading />}>
         <PlyDetail />

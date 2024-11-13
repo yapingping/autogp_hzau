@@ -227,6 +227,7 @@ i18n
           // 群体划分
           "Please enter the desired population number":"请输入期望群体个数",
           "It needs to be an integer greater than 1":"需要是大于 1 的整数",
+          "View the help video":"查看帮助视频",
           // 玉米智能数据管理平台
           "View details":"查看详情",
           "Corn Intelligent Data Management Platform":"玉米智能数据管理平台",

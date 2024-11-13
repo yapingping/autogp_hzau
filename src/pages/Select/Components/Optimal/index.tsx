@@ -7,6 +7,7 @@ import OptimalRecord from './OptimalRecord';
 import { file_filter, file_move, tokenLoss } from '@/utils';
 import './index.scss';
 import { useLocation } from 'react-router-dom';
+import HelpVideo from '@/components/HelpVideo';
 
 const Optimal = () => {
   const pathname = useLocation().pathname;
@@ -431,6 +432,7 @@ const Optimal = () => {
       </div>
       <div className='container'>
         <div className='func'>
+        <HelpVideo videoPath={'/helpVideo/optimal.mp4'}/>
           <Form ref={formRef} form={form} onFinish={onFinish}>
             <Form.Item
               name="vcf"

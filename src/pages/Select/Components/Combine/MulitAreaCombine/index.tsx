@@ -4,6 +4,7 @@ import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { getPersonalFileAPI, getBoutiqueFileAPI, getShareFileAPI, mulitCombineAPI, downloadMulTrainCombine } from '@/apis';
 import { file_filter, file_move } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
+import HelpVideo from '@/components/HelpVideo';
 
 const MulitAreaCombine = () => {
   const { t } = useTranslation();
@@ -430,6 +431,7 @@ const MulitAreaCombine = () => {
 
   return (
     <div className="mulit">
+      <HelpVideo videoPath={'/helpVideo/mul_combine.mp4'}/>
       <Form ref={formRef} form={form} onFinish={onFinish}>
         <Form.Item
           name="vcf"

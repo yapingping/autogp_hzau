@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Space, Table } from 'antd';
-import { Button, Modal,Spin } from 'antd';
+import { Button, Modal, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 
 import './index.scss'
 import { useTranslation } from 'react-i18next';
 import { getToken } from '@/utils';
+// import { useNavigate } from 'react-router-dom';
 const { Column, ColumnGroup } = Table;
 
 interface DataType {
@@ -20,7 +21,8 @@ interface DataType {
   second: string;
   third: string;
   environmentData: string,
-}
+}  
+
 
 const data = [
   {
@@ -36,7 +38,139 @@ const data = [
     environmentData: '详情',
   },
   {
-    key: '1',
+    key: '2',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '3',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '4',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '5',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '6',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
+    name: "HB002",
+    seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
+    seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    matureVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/data_8.mp4',
+    maturePly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_11_2024_08_30_11_05_57/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
+    first: '56',
+    second: '56',
+    third: '56',
+    environmentData: '详情',
+  },
+  {
+    key: '7',
     name: "HB002",
     seedVideo: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_7_2024_08_30_11_04_08/data_7.mp4',
     seedPly: '/datashare/dir_wuhaotest/code/3D_corn/data_demo/HB_8_2024_08_30_11_04_35/point_cloud/iteration_10000/point_cloud_xyz_fin.ply',
@@ -55,9 +189,6 @@ const findVideoDetail = (path) => {
 }
 
 
-const findPlyDetail = (path) => {
-  console.log(path)
-}
 const findEnvDataDetail = (path) => {
   console.log(path)
 }
@@ -65,6 +196,7 @@ const findEnvDataDetail = (path) => {
 const CornManagementPlatform = () => {
 
   const { t } = useTranslation();
+  // const navigate = useNavigate();
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const showVideoModal = (path) => {
     findVideoDetail(path)
@@ -107,13 +239,16 @@ const CornManagementPlatform = () => {
   const handleEnvOk = () => {
     setIsEnvModalOpen(false);
   };
-
+  const findPlyDetail = async(plypath) => {
+    // navigate(`/cimp/ply_detail?url=${plypath}`)
+    console.log(plypath)
+  }
   return (
     <div className="corn_platform">
       <div className="corn_top">
-      <div className="title">
-        {t("玉米智能数据管理平台")}
-      </div>
+        <div className="title">
+          {t("玉米智能数据管理平台")}
+        </div>
       </div>
       <Modal
         title={<p>视频数据</p>}
@@ -125,16 +260,16 @@ const CornManagementPlatform = () => {
           </Button>,
         ]}
       >
-        {videoUrl ?<video
+        {videoUrl ? <video
           style={{ width: "300px" }}
           src={videoUrl}
           controls
         ></video>
-        :
+          :
 
-        <div>
-          <Spin indicator={<LoadingOutlined spin />} size="large" />
-        </div>}
+          <div>
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </div>}
       </Modal>
       <Modal
         title={<p>环境数据详情</p>}
@@ -150,7 +285,10 @@ const CornManagementPlatform = () => {
         <p>...</p>
       </Modal>
       <div className="corn_table">
-        <Table<DataType> dataSource={data}>
+        <Table<DataType>
+          dataSource={data}
+          pagination={{ pageSize: 15 }}
+        >
           <Column title="作物名" dataIndex="name" key="name" />
           <ColumnGroup title="幼苗期">
             <Column

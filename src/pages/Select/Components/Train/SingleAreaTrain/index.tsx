@@ -5,6 +5,7 @@ import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { download1, trainAPI, getPersonalFileAPI, getBoutiqueFileAPI, getShareFileAPI } from '@/apis';
 import { useTranslation } from "react-i18next";
 import { file_filter, file_move } from '@/utils/file.tsx';
+import HelpVideo from "@/components/HelpVideo";
 
 const SingleAreaTrain = () => {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ const SingleAreaTrain = () => {
 
   const [form] = Form.useForm();
 
-  const [model, setModel] = useState('DeepGS');
+  const [model, setModel] = useState('XGBOOST');
 
   const [resData, setResData] = useState(null);
 
@@ -336,6 +337,7 @@ const SingleAreaTrain = () => {
   return (
 
     <div className="single_area">
+      <HelpVideo videoPath={'/helpVideo/train.mp4'}/>
       <Form ref={formRef} form={form} name='normFile' onFinish={onFinish}>
         <Form.Item
           name='vcf'
@@ -391,20 +393,20 @@ const SingleAreaTrain = () => {
         >
           <Space>
             <Select
-              defaultValue='DeepGS'
-              style={{ width: 150 }}
+              defaultValue="XGBOOST"
+              style={{ width: 120 }}
               onChange={modelChange}
               options={[
-                { value: 'DNNGP', label: 'DNNGP' },
-                { value: 'DLGWAS', label: 'DLGWAS' },
-                { value: 'DeepGS', label: 'DeepGS' },
-                { value: 'SoyDNGP', label: 'SoyDNGP' },
-                { value: 'OHGP', label: 'OHGP' },
                 { value: 'XGBOOST', label: 'XGBOOST' },
                 { value: 'GBDT', label: 'GBDT' },
                 { value: 'MLP', label: 'MLP' },
                 { value: 'SVM', label: 'SVM' },
                 { value: 'RandomForest', label: 'RandomForest' },
+                { value: 'DNNGP', label: 'DNNGP' },
+                { value: 'DLGWAS', label: 'DLGWAS' },
+                { value: 'DeepGS', label: 'DeepGS' },
+                { value: 'SoyDNGP', label: 'SoyDNGP' },
+                { value: 'OHGP', label: 'OHGP' },
               ]}
             />
           </Space>

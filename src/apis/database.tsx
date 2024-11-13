@@ -96,8 +96,10 @@ function uploadBoutiqueFileAPI(fileData) {
 // 下载个人文件
 function downloadPersonalFileAPI(fileName) {
   console.log(fileName);
-
-  return request.get('/download', { params: { fileName } })
+  return request.get('/download', {
+    params: { fileName },
+    responseType: 'blob' // 设置为二进制流
+  })
     .then(response => response)
     .catch(error => {
       throw error;
@@ -105,7 +107,10 @@ function downloadPersonalFileAPI(fileName) {
 }
 // 下载精品文件
 function downloadBoutiqueFileAPI(fileName) {
-  return request.get('/boutique/download', { params: { fileName } })
+  return request.get('/boutique/download', {
+    params: { fileName },
+    responseType: 'blob' // 设置为二进制流
+  })
     .then(response => response)
     .catch(error => {
       throw error;
@@ -113,7 +118,10 @@ function downloadBoutiqueFileAPI(fileName) {
 }
 // 下载共享文件
 function downloadShareFileAPI(fileName) {
-  return request.get('/share/download', { params: { fileName } })
+  return request.get('/share/download', {
+    params: { fileName },
+    responseType: 'blob' // 设置为二进制流
+  })
     .then(response => response)
     .catch(error => {
       throw error;

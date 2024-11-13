@@ -6,6 +6,7 @@ import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { combineAPI, download3, getPersonalFileAPI, getBoutiqueFileAPI, getShareFileAPI } from '@/apis';
 import { file_filter, file_move } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
+import HelpVideo from '@/components/HelpVideo';
 
 const SingleAreaCombine = () => {
   const { t } = useTranslation();
@@ -389,6 +390,7 @@ const SingleAreaCombine = () => {
 
   return (
     <div className="single">
+      <HelpVideo videoPath={'/helpVideo/combine.mp4'}/>
       <Form ref={formRef} form={form} onFinish={onFinish}>
         <Form.Item
           name="vcf"

@@ -5,6 +5,7 @@ import { UploadOutlined, FileTextOutlined } from '@ant-design/icons';
 import { download2, getBoutiqueFileAPI, getPersonalFileAPI, getShareFileAPI, predictAPI } from '@/apis';
 import { downloadPredictRecord, file_filter, file_move } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import HelpVideo from '@/components/HelpVideo';
 const SingleAreaPredict = () => {
   
   const { t } = useTranslation();
@@ -210,7 +211,7 @@ const SingleAreaPredict = () => {
     name: 'file',
     action: 'http://218.199.69.63:39600/uploadFile',
     headers: {
-      'Content-Type': 'application/form-data',
+      // 'Content-Type': 'application/form-data',
       token: `${localStorage.getItem('token_key')}`,
     },
     data: {
@@ -300,6 +301,7 @@ const SingleAreaPredict = () => {
   
   return (
     <div className="single">
+      <HelpVideo videoPath={'/helpVideo/predict.mp4'}/>
       <Form ref={formRef} form={form} onFinish={onFinish}>
         <Form.Item
           name="vcf"
