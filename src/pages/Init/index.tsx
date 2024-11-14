@@ -102,9 +102,12 @@ const Init = () => {
           AutoGP
         </div>
         <div className="content">
-          AutoGP provides a powerful genetic prediction phenotype tool for your crops.
-          Simply provide the genome and phenotype of the material, and we will automate model training and phenotypic prediction,
-          providing you with highly accurate results for personalized genetic analysis and phenotypic prediction.
+        We present the development of an intelligent breeding platform named AutoGP (http://autogp.hzau.edu.cn),
+        which integrates genotype extraction, phenotypic extraction, and GS models of genotype-to-phenotype within a user-friendly web interface.
+        AutoGP has three main advantages over previously developed platforms: 
+        (1) we designed an efficient sequencing chip to identify high-quality, high-confidence SNPs throughout gene regulatory networks; 
+        (2) we developed a complete workflow for plant phenotypic extraction (such as plant height and leaf count) from smartphone-captured video; 
+        (3) we provided a broad model pool, allowing users to select from five ML models (SVM, XGBoost, GBDT, MLP, and RF) and four commonly used DL models (DeepGS, DLGWAS, DNNGP, and SoyDNGP).
         </div>
         <div className="begin">
           <Button
