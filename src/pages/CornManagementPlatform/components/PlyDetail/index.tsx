@@ -24,7 +24,7 @@ const PlyDetail = () => {
 
   // 获取 URL 中的查询参数
   const queryParams = new URLSearchParams(location.search);
-  const plypath = queryParams.get('plypath'); // 获取 plyPath 参数值
+  const plypath = queryParams.get('url'); // 获取 plyPath 参数值
   const loadingPly = async () => {
 
     // 展示 ply 文件
@@ -45,7 +45,7 @@ const PlyDetail = () => {
   }
 
   return (
-    <div className="ply_detail">点云详情
+    <div className="ply_detail">
       {plyUrl!==null ? <PlyInteraction
         show={true}
         plyUrl={plyUrl}

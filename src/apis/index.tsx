@@ -6,3 +6,6 @@ export * from './comment'
 export * from './user'
 
 export * from './fileMoveAndCopy'
+
+// 玉米数据库
+export * from './corn/province'

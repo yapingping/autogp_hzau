@@ -40,8 +40,6 @@ const Highquality = ({ dataKey = "data" }) => {
 
   useEffect(() => {
     async function getData() {
-      try {
-        // 等待注册API的响应
         const data = (await getBoutiqueFileAPI()).data;
         if (data.code === 200) {
           console.log('Data:', data);
@@ -59,10 +57,6 @@ const Highquality = ({ dataKey = "data" }) => {
         }else{
           message.error(data.msg)
         } 
-      } catch (error) {
-        console.error('Registration failed:', error);
-        message.error(t("Network connection error, please check the network and try again"));
-      }
     }
     getData()
   }, [refreshData])

@@ -129,8 +129,8 @@ const Login = () => {
           </Form>
         </div>
         <div className="test animate__animated animate__backInUp">
-          <div>test account1: &nbsp;usename: test_account, password: 123456</div>
-          <div>test account2: &nbsp;usename: test_account1, password: 123456</div>
+          <div>test account1: &nbsp;usename: anylize, password: 123456</div>
+          <div>test account2: &nbsp;usename: YaP, password: 123456</div>
         </div>
         {/* <div className='content animate__animated animate__backInUp'>AutoGP provides a powerful genetic prediction phenotype tool for your crops. Simply provide the genome and phenotype of the material, and we will automate model training and phenotypic prediction, providing you with highly accurate results for personalized genetic analysis and phenotypic prediction.</div> */}
       </div>

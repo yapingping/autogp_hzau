@@ -8,8 +8,8 @@ import MulitAreaPredict from '@/pages/Select/Components/Predict/MulitAreaPredict
 import SingleAreaCombine from '@/pages/Select/Components/Combine/SingleAreaCombine';
 import MulitAreaCombine from '@/pages/Select/Components/Combine/MulitAreaCombine';
 import TrainOptimal from '@/pages/Select/Components/TrainOptimal';
-import CornManagementPlatform from '@/pages/CornManagementPlatform';
-import PlyDetail from '@/pages/CornManagementPlatform/components/PlyDetail';
+import Cimp from '@/pages/CornManagementPlatform';
+import ChinaMap from '@/pages/CornManagementPlatform/components/ChinaMap';
 
 // 使用 React.lazy 实现懒加载
 const Init = React.lazy(() => import('@/pages/Init'));
@@ -37,14 +37,15 @@ const PreGene = React.lazy(() => import('@/pages/Pretreatment/Components/Gene'))
 const AnalGWAS = React.lazy(() => import('@/pages/Analysis/Components/GWAS'));
 const AnalGroup = React.lazy(() => import('@/pages/Analysis/Components/Group'));
 const App = React.lazy(() => import('@/App'));
-
-const RouteLoading = React.lazy(()=>import("@/components/RouteLoading"))
-const NotFound = React.lazy(()=>import("@/components/NotFound"))
+const RouteLoading = React.lazy(() => import("@/components/RouteLoading"))
+const NotFound = React.lazy(() => import("@/components/NotFound"))
+const ProvinceDetail = React.lazy(() => import('@/pages/CornManagementPlatform/components/ProvinceDetail'));  // 添加 ProvinceDetail 的懒加载
+const PlyDetail = React.lazy(() => import('@/pages/CornManagementPlatform/components/PlyDetail'));  // 添加 PlyDetail 的懒加载
 
 export const router = createBrowserRouter([
   {
-    path:'/',
-    element:(
+    path: '/',
+    element: (
       <Suspense fallback={<RouteLoading />}>
         <Init />
       </Suspense>
@@ -163,18 +164,18 @@ export const router = createBrowserRouter([
                 <Train />
               </Suspense>
             ),
-            children:[
+            children: [
               {
                 index: true,  // 设置默认子路由
                 element: <Navigate to="single_area" replace />
               },
               {
-                path:"single_area",
-                element:<SingleAreaTrain />
+                path: "single_area",
+                element: <SingleAreaTrain />
               },
               {
-                path:"mulit_area",
-                element:<MulitAreaTrain />
+                path: "mulit_area",
+                element: <MulitAreaTrain />
               }
             ]
           },
@@ -185,18 +186,18 @@ export const router = createBrowserRouter([
                 <Predict />
               </Suspense>
             ),
-            children:[
+            children: [
               {
                 index: true,  // 设置默认子路由
                 element: <Navigate to="single_area" replace />
               },
               {
-                path:"single_area",
-                element:<SingleAreaPredict />
+                path: "single_area",
+                element: <SingleAreaPredict />
               },
               {
-                path:"mulit_area",
-                element:<MulitAreaPredict />
+                path: "mulit_area",
+                element: <MulitAreaPredict />
               }
             ]
           },
@@ -207,18 +208,18 @@ export const router = createBrowserRouter([
                 <Combine />
               </Suspense>
             ),
-            children:[
+            children: [
               {
                 index: true,  // 设置默认子路由
                 element: <Navigate to="single_area" replace />
               },
               {
-                path:"single_area",
-                element:<SingleAreaCombine />
+                path: "single_area",
+                element: <SingleAreaCombine />
               },
               {
-                path:"mulit_area",
-                element:<MulitAreaCombine />
+                path: "mulit_area",
+                element: <MulitAreaCombine />
               }
             ]
           },
@@ -324,9 +325,33 @@ export const router = createBrowserRouter([
     path: '/cimp',
     element: (
       <Suspense fallback={<RouteLoading />}>
-        <CornManagementPlatform />
+        <Cimp />
       </Suspense>
-    )
+    ),
+    children: [
+      {
+        index: true,  // 设置默认子路由
+        element: <Navigate to="china_map" replace />
+      },
+      {
+        path: 'china_map',
+        element: (
+          <Suspense fallback={<RouteLoading />}>
+            <ChinaMap />
+          </Suspense>
+        )
+      },
+      {
+        path: 'province_detail',
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<RouteLoading />}>
+              <ProvinceDetail />
+            </Suspense>
+          </RequireAuth>
+        )
+      },
+    ]
   },
   {
     path: `/cimp/ply_detail`,

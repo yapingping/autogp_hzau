@@ -15,25 +15,30 @@ const Init = () => {
 
 
   const toHome = () => {
-    if (username !== null) {
-      // 使用 startTransition 包裹 navigate，优化导航行为
-      startTransition(() => {
-        navigate('/app/select/train');
-      });
-    } else {
-      message.error("You are not logged in yet, please log in first!")
-    }
+    // if (username !== null) {
+    //   // 使用 startTransition 包裹 navigate，优化导航行为
+    //   startTransition(() => {
+    //     navigate('/app/select/train');
+    //   });
+    // } else {
+    //   message.error("You are not logged in yet, please log in first!")
+    // }
+    
+    navigate('/app/select/train');
   }
   const toCorn = () => {
-    if (username !== null) {
-      // 使用 startTransition 包裹 navigate，优化导航行为
-      // startTransition(() => {
-      //   navigate('/corn_intelligent_management_platform');
-      // });
-      window.open('/cimp', '_black')
-    } else {
-      message.error("You are not logged in yet, please log in first!")
-    }
+    // if (username !== null) {
+    //   // 使用 startTransition 包裹 navigate，优化导航行为
+    //   // startTransition(() => {
+    //   //   navigate('/corn_intelligent_management_platform');
+    //   // });
+    //   window.open('/cimp', '_black')
+    // } else {
+    //   // message.error("You are not logged in yet, please log in first!")
+    // }
+
+    
+    window.open('/cimp', '_black')
   }
 
   const loginOrRegister = (route) => {
@@ -77,7 +82,6 @@ const Init = () => {
         }
       } catch (error) {
         console.error('failed:', error);
-        message.error(t("Failed to obtain personal information. Please check the network and try again or log in again."));
       }
     }
     getData();
@@ -143,7 +147,7 @@ const Init = () => {
               <img src="/assets/imgs/home/corn_platform.jpg" alt="" />
             </div>
             <div className="right">
-              <div className="title">{t("Corn Intelligent Data Management Platform")}</div>
+              <div className="title">{t("中国历史性品种群体多环境表型的遗传解析")}</div>
               <div className="item">
                 &nbsp;<CarryOutOutlined /> &nbsp;
                 Presents the name of each maize material, genotype data, video of seedlings and maturity, point cloud data, up to three phenotypic data, and environmental data related to the growing environment.

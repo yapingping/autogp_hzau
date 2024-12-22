@@ -292,9 +292,10 @@ const Phenotype = () => {
     <div className="phenotype">
       <div className="title">{t("Phenotypic data analysis")}</div>
       <div className="img">
-        <img src="/assets/imgs/analysis_p_1.jpg" alt="" />
-        <img src="/assets/imgs/analysis_p_2.jpg" alt="" />
-        <img src="/assets/imgs/analysis_p_3.jpg" alt="" />
+        <img src="/assets/imgs/analysis_p_1.png" alt="" />
+        <img src="/assets/imgs/analysis_p_2.png" alt="" />
+        <img src="/assets/imgs/analysis_p_3.png" alt="" />
+        <img src="/assets/imgs/analysis_p_4.png" alt="" />
       </div>
       <div className="func">
         <div className="middle">

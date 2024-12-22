@@ -13,6 +13,13 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use((config) => {
   const token = getToken()
+
+  const isAuthRequest = config.url.includes('/login') || config.url.includes('/enroll');  // 判断是否为登录或注册接口
+  if (!isAuthRequest && !token) {
+    // 如果不是登录或注册接口且没有 token，取消请求
+    return Promise.reject(new Error('No token, request is blocked.'));
+  }
+
   if (token) {
     config.headers.token = `${token}`
   }

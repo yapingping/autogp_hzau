@@ -38,103 +38,99 @@ const Personaldata = ({ dataKey = "data" }) => {
     console.log(dataKey);
 
     async function getData() {
-      try {
-        const data = (await getPersonalFileAPI()).data;
-        if (data.code === 200) {
-          console.log('Data:', data);
-          console.log(data.data);
-          setRecords(
-            data.data.map(record => ({
-              ...record,
-              createTime: record.createTime ? record.createTime.slice(0, 10) : ''
-            }))
-          )
-        } else if (data.code == 401) {
-          if (dataKey === "data") {
-            tokenLoss(pathname);
-          }
-        } else {
-          message.error(data.msg)
+      const data = (await getPersonalFileAPI()).data;
+      if (data.code === 200) {
+        console.log('Data:', data);
+        console.log(data.data);
+        setRecords(
+          data.data.map(record => ({
+            ...record,
+            createTime: record.createTime ? record.createTime.slice(0, 10) : ''
+          }))
+        )
+      } else if (data.code == 401) {
+        if (dataKey === "data") {
+          tokenLoss(pathname);
         }
-      } catch (error) {
-      console.error('Registration failed:', error);
-      message.error(t("Network connection error, please check the network and try again"));
+      } else {
+        message.error(data.msg)
+      }
+
     }
-  }
     getData()
   }, [refreshData])
 
-// 下载文件
-const handleDownload = async (fileName: string) => {
-  const record = records.find(item => item.fileName === fileName) || null; // 如果未找到记录，返回 null
-  // setEditingRecord(record);
-  console.log(record)
-  console.log(fileName);
-  try {
-    const response = await downloadPersonalFileAPI(fileName + "." + record.fileType)
-    const fullFileName = fileName + "." + record.fileType;
-    const res = response.data;
-    console.log(res);
-    const blob = new Blob([response.data], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', fullFileName);
-    document.body.appendChild(link);
-    link.click();
-    window.URL.revokeObjectURL(url); // 清理内存中的引用
-    link.remove(); // 清理DOM中的元素
+  // 下载文件
+  const handleDownload = async (fileName: string) => {
+    const record = records.find(item => item.fileName === fileName) || null; // 如果未找到记录，返回 null
+    // setEditingRecord(record);
+    console.log(record)
+    console.log(fileName);
+    try {
+      const response = await downloadPersonalFileAPI(fileName + "." + record.fileType)
+      const fullFileName = fileName + "." + record.fileType;
+      const res = response.data;
+      console.log(res);
+      const blob = new Blob([response.data], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fullFileName);
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url); // 清理内存中的引用
+      link.remove(); // 清理DOM中的元素
 
-    message.success(t(`Successfully downloaded file`) + `: ${fileName}`)
-  } catch (error) {
-    console.error('Training failed:', error);
-    message.error(t("Network connection error, please check the network and try again"))
-  }
-};
-
-// 删除文件
-const handleDelete = (fileName: string) => {
-  Modal.confirm({
-    title: t('Confirm file deletion'),
-    content: t(`Whether to confirm the deletion of the file`) + `：${fileName}`,
-    async onOk() {
-      // setRecords(records.filter(item => item.fileName !== fileName));
-      try {
-        const record = records.find(item => item.fileName === fileName) || null; // 如果未找到记录，返回 null
-        console.log(fileName)
-        const response = await deletePersonalFileAPI(fileName + "." + record.fileType)
-        const res = response.data;
-        if (res.code == 200) {
-          console.log(res);
-          message.success(t('The file has been deleted!'));
-          setRecords(records => records.filter(item => item.fileName !== fileName))
-        } else {
-          message.error(res.msg)
-        }
-      } catch (error) {
-        console.error('Training failed:', error);
-        message.error(t("Network connection error, please check the network and try again"))
-      }
-    },
-    onCancel() {
-      console.log(t('取消删除'));
-    },
-  });
-};
-
-return (
-  <div className='Personaldata'>
-    {
-      dataKey === "data" && <div>
-        <div className='title'>{t('Personal databases')}</div>
-        <RecordForm record={editingRecord} setRecords={setRecords} records={records} />
-      </div>
+      message.success(t(`Successfully downloaded file`) + `: ${fileName}`)
+    } catch (error) {
+      console.error('Training failed:', error);
+      message.error(t("Network connection error, please check the network and try again"))
     }
-    <div className="table">
-      <DataTable dataKey={dataKey} records={records} onDownload={handleDownload} onDelete={handleDelete} />
+  };
+
+  // 删除文件
+  const handleDelete = (fileName: string) => {
+    Modal.confirm({
+      title: t('Confirm file deletion'),
+      content: t(`Whether to confirm the deletion of the file`) + `：${fileName}`,
+      async onOk() {
+        // setRecords(records.filter(item => item.fileName !== fileName));
+        try {
+          const record = records.find(item => item.fileName === fileName) || null; // 如果未找到记录，返回 null
+          console.log(fileName)
+          const response = await deletePersonalFileAPI(fileName + "." + record.fileType)
+          const res = response.data;
+          if (res.code == 200) {
+            console.log(res);
+            message.success(t('The file has been deleted!'));
+            setRecords(records => records.filter(item => item.fileName !== fileName))
+          } else {
+            message.error(res.msg)
+          }
+        } catch (error) {
+          console.error('Training failed:', error);
+          message.error(t("Network connection error, please check the network and try again"))
+        }
+      },
+      onCancel() {
+        console.log(t('取消删除'));
+      },
+    });
+  };
+
+  return (
+    <div className='Personaldata'>
+      {
+        dataKey === "data" && <div>
+          <div className='title'>{t('Personal databases')}</div>
+          <RecordForm record={editingRecord} setRecords={setRecords} records={records} />
+        </div>
+      }
+      <div className="table">
+        <DataTable dataKey={dataKey} records={records} onDownload={handleDownload} onDelete={handleDelete} />
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Personaldata;

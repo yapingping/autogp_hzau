@@ -43,10 +43,14 @@
   }
   .img{
     bottom: 0;
+    display: flex;
+    justify-content: space-around; // 根据需要调整对齐方式
+    align-items: center; // 垂直居中
+    flex-wrap: wrap; // 允许换行
     img{
-      padding:0 2vw;
-      width: 20vw;
-      height: 13vw;
+      // padding:0 0.2vw;
+      width: 18vw;
+      height: 20vw;
     }
   }
 
