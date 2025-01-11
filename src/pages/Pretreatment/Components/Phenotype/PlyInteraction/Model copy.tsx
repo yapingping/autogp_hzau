@@ -2,61 +2,44 @@ import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader.js';
-import { useEffect } from 'react';
 const Model = ({ plyUrl, onSelectPoint, leavesPoints, selectedPoints, referPoint, countPoints, distancePoint,rotation }) => {
   const plyGeometry = useLoader(PLYLoader, plyUrl);
 
-  // 如果加载成功后处理 geometry
-  useEffect(() => {
-    if (plyGeometry) {
-      const geometry = Array.isArray(plyGeometry) ? plyGeometry[0] : plyGeometry;
-
-      if (geometry.attributes.position) {
-        // 获取 position 数组
-        const positions = geometry.attributes.position.array;
-
-        // 检查是否包含非法值
-        let hasNaN = false;
-        for (let i = 0; i < positions.length; i++) {
-          if (isNaN(positions[i])) {
-            hasNaN = true;
-            break;
-          }
-        }
-
-        if (hasNaN) {
-          console.error('Geometry contains NaN values in position attribute.');
-          // 清理非法值，将 NaN 替换为 0
-          const cleanedPositions = positions.map((value) => (isNaN(value) ? 0 : value));
-          geometry.setAttribute('position', new THREE.Float32BufferAttribute(cleanedPositions, 3));
-        }
-
-        // 重新计算边界和法线
-        geometry.computeBoundingBox();
-        geometry.computeBoundingSphere();
-        geometry.computeVertexNormals();
-      } else {
-        console.error('Geometry has no position attribute.');
-      }
-    }
-  }, [plyGeometry]);
-
-  // 材质设置
-  const material = new THREE.PointsMaterial({ size: 0.01, vertexColors: true });
   // 检查 plyGeometry 是否是数组，如果是则使用第一个元素
   const geometry = Array.isArray(plyGeometry) ? plyGeometry[0] : plyGeometry;
+
+  const material = new THREE.PointsMaterial({ size: 0.01, vertexColors: true });
   const points = new THREE.Points(geometry, material);
+  // 将模型移动到中心
+  // const box = new THREE.Box3().setFromObject(points);
+  // const center = box.getCenter(new THREE.Vector3());
+  // points.position.sub(center);
+
+
+  // 计算模型的边界框，然后将模型向下移动一段距离
+  const box = new THREE.Box3().setFromObject(points);
+  const center = box.getCenter(new THREE.Vector3());
+  const offset = 0; // 向下移动的距离，可以根据需要调整
+  points.position.set(-center.x, -center.y - offset, -center.z); // 设置位置，向下移动
+
+
+  // 放大模型
+  // const scale = 1; // 设置缩放因子，可以根据需要调整
+  // points.scale.set(scale, scale, scale); // 放大模型
 
   const handlePointerDown = (event) => {
     if (event.intersections.length > 0) {
       const { point } = event.intersections[0];
       console.log('Clicked point:', point);
       onSelectPoint(point);
+      // 只处理第一个交点，阻止进一步处理
+      // 确保每次点击只调用一次 handleSelectPoint
       event.stopPropagation();
     } else {
       console.log('No valid point clicked.');
     }
   };
+
 
   return (
     // <primitive

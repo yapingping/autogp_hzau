@@ -229,6 +229,7 @@ i18n
           "It needs to be an integer greater than 1":"需要是大于 1 的整数",
           "View the help video":"查看帮助视频",
           // 玉米智能数据管理平台
+          "Genetic analysis of multi-environmental phenotypes in historical breed populations in China":"中国历史性品种群体多环境表型的遗传解析",
           "View details":"查看详情",
           "Corn Intelligent Data Management Platform":"玉米智能数据管理平台",
           "Presents the name of each maize material, genotype data, video of seedlings and maturity, point cloud data, up to three phenotypic data, and environmental data related to the growing environment.":"呈现每个玉米材料的名称、基因型数据、幼苗和成熟期的视频、点云数据、最多三项表型数据，以及与生长环境相关的环境数据。",

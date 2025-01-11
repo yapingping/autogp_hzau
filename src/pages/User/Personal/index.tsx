@@ -203,7 +203,7 @@ const Personal = () => {
           <Personaldata dataKey="personal" />
           <span className="Link">
             <Link
-              to="/manage/personaldata"
+              to="/app/manage/personaldata"
               style={{ textDecoration: 'none', color: 'inherit', fontSize: '2vh' }}
             >
               {t("Find out more")} &nbsp;&gt;
@@ -219,7 +219,7 @@ const Personal = () => {
           <ShareData dataKey="personal" />
           <span className="Link">
             <Link
-              to="app/manage/sharedata"
+              to="/app/manage/sharedata"
               style={{ textDecoration: 'none', color: 'inherit', fontSize: '2vh' }}
             >
               {t("Find out more")} &nbsp;&gt;
@@ -233,7 +233,7 @@ const Personal = () => {
           <Highquality dataKey='personal' />
           <span className="Link">
             <Link
-              to="app/manage/highquality"
+              to="/app/manage/highquality"
               style={{ textDecoration: 'none', color: 'inherit', fontSize: '2vh' }}
             >
               {t("Find out more")} &nbsp;&gt;
@@ -247,7 +247,7 @@ const Personal = () => {
           <PhenotypeData dataKey="personal" />
           <span className="Link">
             <Link
-              to="app/manage/phenotype"
+              to="/app/manage/phenotype"
               style={{ textDecoration: 'none', color: 'inherit', fontSize: '2vh' }}
             >
               {t("Find out more")} &nbsp;&gt;

@@ -12,6 +12,9 @@ export default defineConfig({
     removeConsole(),
   ],
   server: {
+    hmr: {
+      overlay: false, // 禁用 HMR 报错覆盖
+    },
     proxy: {
       "/api": {
         target: "http://218.199.69.63:39600/",

@@ -147,7 +147,7 @@ const Init = () => {
               <img src="/assets/imgs/home/corn_platform.jpg" alt="" />
             </div>
             <div className="right">
-              <div className="title">{t("中国历史性品种群体多环境表型的遗传解析")}</div>
+              <div className="title">{t("Genetic analysis of multi-environmental phenotypes in historical breed populations in China")}</div>
               <div className="item">
                 &nbsp;<CarryOutOutlined /> &nbsp;
                 Presents the name of each maize material, genotype data, video of seedlings and maturity, point cloud data, up to three phenotypic data, and environmental data related to the growing environment.

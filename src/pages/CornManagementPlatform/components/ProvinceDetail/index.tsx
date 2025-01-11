@@ -86,7 +86,6 @@ const ProvinceDetail = () => {
   const findPlyDetail = async (plypath) => {
     console.log("点云路径：", plypath)
     if (plypath !== null) {
-
       navigate(`/cimp/ply_detail?url=${plypath}`)
     } else {
       message.error("暂无数据！")
@@ -128,8 +127,8 @@ const ProvinceDetail = () => {
           } else {
             item.image = null; // 没有图片时设置为 null
           }
-          if (item.ripePoint) {
-            const pictureBlobP = await getPicture(item.ripePoint); // 获取点云图片的 Blob 对象
+          if (item.ripepPath) {
+            const pictureBlobP = await getPicture(item.ripepPath); // 获取点云图片的 Blob 对象
             const pictureUrlP = URL.createObjectURL(pictureBlobP);
             item.image_p = pictureUrlP; // 保存为点云图片 URL
             console.log(pictureUrlP)
@@ -282,9 +281,9 @@ const ProvinceDetail = () => {
               align='center'
               render={(_: any, record: DataType) => (
                 <Space size="middle">
-                  <a onClick={() => findPlyDetail(record.ripepPath)} href="javascript:;">
+                  <a onClick={() => findPlyDetail(record.ripePoint)} href="javascript:;">
                     {record.image_p && <img src={record.image_p} alt="点云详情" style={{ width: '100px', height: '150px' }} />}
-                    {!record.ripepPath && <div>暂无详细数据</div>}
+                    {!record.ripePoint && <div>暂无详细数据</div>}
                   </a>
 
                 </Space>

@@ -1,7 +1,7 @@
 import PlyInteraction from "@/pages/Pretreatment/Components/Phenotype/PlyInteraction"
 import { useEffect, useState } from "react"
 import './index.scss'
-import { useLocation } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import { getVideoOrObjAPI } from "@/apis"
 import { message } from "antd"
 import { useTranslation } from "react-i18next"
@@ -15,9 +15,11 @@ const PlyDetail = () => {
   const { t } = useTranslation();
   const [plyUrl, setPlyUrl] = useState(null)
   // const {url} = useParams()
+  const [searchParams] = useSearchParams();
+  const url = searchParams.get('url');
   useEffect(() => {
     loadingPly();
-    console.log(plyUrl)
+    setPlyUrl(url)
   }, [])
 
   const location = useLocation();
@@ -26,7 +28,7 @@ const PlyDetail = () => {
   const queryParams = new URLSearchParams(location.search);
   const plypath = queryParams.get('url'); // 获取 plyPath 参数值
   const loadingPly = async () => {
-
+    console.log("点云路径2:",plypath);
     // 展示 ply 文件
     try {
       message.success(t("Committed, loading... Please don't leave!"));
@@ -36,6 +38,8 @@ const PlyDetail = () => {
       response = cleanPlyData(response); // 清除 `nan` 值
       const blob = new Blob([response], { type: 'application/octet-stream' });
       const url = URL.createObjectURL(blob);
+      console.log(url);
+      
       setPlyUrl(url);
       message.success(t("The model was successfully extracted!"));
     } catch (error) {
